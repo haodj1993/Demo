@@ -1,0 +1,33 @@
+'’·•¶Žš—ñ“ü‚ê‘Ö‚í‚Á 
+Public Sub subMojiChange(strMoji As String, strRetMoji As String)
+
+    Dim intLoop     As Integer
+    Dim intSpcCnt   As Integer
+    Dim intLength   As Integer
+    Dim strData     As String
+
+    intSpcCnt = 0
+    
+    strData = ""
+    intLength = Len(strMoji)
+    For intLoop = 1 To Len(strMoji)
+        Select Case Asc(Mid$(strMoji, intLoop, 1))
+        Case 0 To 255
+            intSpcCnt = intSpcCnt + 1
+        Case Else
+            intSpcCnt = intSpcCnt + 2
+        End Select
+        If intSpcCnt > intLength Then
+            strData = strData & " "
+            Exit For
+        ElseIf intSpcCnt = intLength Then
+            strData = strData & Mid$(strMoji, intLoop, 1)
+            Exit For
+        Else
+            strData = strData & Mid$(strMoji, intLoop, 1)
+        End If
+    Next
+
+    strRetMoji = strData
+
+End Sub
